@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Controller : MonoBehaviour
+namespace Assets.Inventory.Scripts.Controller
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public abstract class Controller
     {
-        
+        protected readonly Model.Model model;
+        protected readonly View view;
+
+        public Controller(Model.Model model, View view)
+        {
+            this.model = model;
+            this.view = view;
+        }
+
     }
 }
