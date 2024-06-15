@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   Name: Apple
-  ItemType: 1
+  ItemType: 0
   VisualizationSprite: {fileID: 21300000, guid: 8be25189fe39173419ad0ed766b49cd5, type: 3}

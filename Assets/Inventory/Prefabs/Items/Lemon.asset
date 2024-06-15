@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Lemon
   m_EditorClassIdentifier: 
   Name: Lemon
-  ItemType: 2
+  ItemType: 1
   VisualizationSprite: {fileID: 21300000, guid: 126ffaf9352fa994199aaee3b0737369, type: 3}
