@@ -5,10 +5,10 @@ namespace Assets.Inventory.Scripts.Helpers.Cells
 {
     public class Cell : MonoBehaviour
     {
-        public bool isEmpty = true;
+        public bool IsEmpty => ItemPrefabs is null;
         public CellType CellType { get; set; }
 
-        public ItemPrefabs ItemPrefabs { get; set; }
+        public ItemPrefabs ItemPrefabs;
 
 
     }

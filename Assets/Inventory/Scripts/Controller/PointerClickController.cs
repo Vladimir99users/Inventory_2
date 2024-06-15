@@ -1,10 +1,12 @@
+using Assets.Inventory.Scripts.Helpers.Cells;
+using Assets.Inventory.Scripts.Helpers.Message;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Inventory.Scripts.Controller
 {
-    public class PointerClickController : Controller, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler, IPointerMoveHandler
+    public class PointerClickController : Controller, IPointerUpHandler, IPointerDownHandler, IPointerMoveHandler
     {
         [SerializeField] private Button generateItemButton;
 
@@ -17,29 +19,44 @@ namespace Assets.Inventory.Scripts.Controller
         {
             model.AddItem();
         }
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            Debug.Log("Enter");
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            Debug.Log("Exit");
-        }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            Debug.Log("Up");
+            if (eventData.pointerPressRaycast.gameObject.TryGetComponent(out Cell cell))
+            {
+                if (model.CurrentClickCell != null && model.CurrentClickCell != cell && cell.IsEmpty)
+                {
+                    model.MoveItemBetweenCells(cell);
+                }
+            }
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log("Down");
+            if (eventData.pointerPressRaycast.gameObject.TryGetComponent(out Cell cell))
+            {
+                if (!cell.IsEmpty && model.CurrentClickCell != null && model.CurrentClickCell != cell)
+                {
+                    view.DisplayText(MessagePlayerContainers.PlaceIsNotEmpty);
+                    return;
+                }
+
+                if (cell.ItemPrefabs != null)
+                {
+                    model.CurrentClickCell = cell;
+                }
+            }
         }
 
         public void OnPointerMove(PointerEventData eventData)
         {
-            Debug.Log("Move");
+            var positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Debug.Log(positionMouse);
+            if (model.CurrentClickCell != null)
+            {
+                model.MoveItem(new Vector3(positionMouse.x, positionMouse.y, 0));
+                view.UpdatePositionCell(model.CurrentClickCell);
+            }
         }
     }
 }

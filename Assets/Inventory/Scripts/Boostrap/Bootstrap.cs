@@ -32,7 +32,7 @@ namespace Inventory
             viewPrefabs.transform.SetParent(controllerPrefabs.transform);
             viewPrefabs.transform.SetAsFirstSibling();
             var model = new SimplyModel(viewPrefabs, settingModel, itemFactory, cellFactory);
-            model.BuildInventory(this);
+            model.BuildInventory();
             controllerPrefabs.Initialize(model, viewPrefabs);
         }
 
@@ -43,6 +43,12 @@ namespace Inventory
 
             if (controller is null)
                 throw new System.ArgumentNullException("Controller is empty!");
+
+            if (itemFactory is null)
+                throw new System.ArgumentNullException("Item Factory is empty!");
+
+            if (cellFactory is null)
+                throw new System.ArgumentNullException("Ñell Factory is empty!");
 
             return true;
         }
