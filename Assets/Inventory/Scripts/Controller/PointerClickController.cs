@@ -32,7 +32,7 @@ namespace Assets.Inventory.Scripts.Controller
 
             if (model.CurrentClickCell != null)
             {
-                view.UpdateVisial();
+                view.UpdateVisual();
             }
         }
 

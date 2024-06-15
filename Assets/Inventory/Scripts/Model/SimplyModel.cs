@@ -1,11 +1,14 @@
 using Assets.Inventory.Scripts.Boostrap;
+using Assets.Inventory.Scripts.Helpers.Audio;
 using Assets.Inventory.Scripts.Helpers.Cells;
 using Assets.Inventory.Scripts.Helpers.Factory;
 using Assets.Inventory.Scripts.Helpers.Items;
 using Assets.Inventory.Scripts.Helpers.Message;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.Inventory.Scripts.Model
 {
@@ -46,43 +49,53 @@ namespace Assets.Inventory.Scripts.Model
         }
         public override void AddItem()
         {
-            if (fastHandCells.All(x => !x.IsEmpty))
-            {
-                view.DisplayText(MessagePlayerContainers.InventoryIsFullIsNotEmpty);
+            if (IsInventoryFull())
                 return;
-            }
 
             var emptyCell = fastHandCells.FirstOrDefault(x => x.IsEmpty);
-            var item = itemFactory.GetObject(ItemType.Apple);
+            var item = itemFactory.GetObject(GetRandomItemType());
             emptyCell.ItemPrefabs = item;
-            view.UpdateFastHandInventory(fastHandCells);
+            view.UpdateFastHandInventory();
         }
+
+        private ItemType GetRandomItemType()
+        {
+            var values = Enum.GetValues(typeof(ItemType));
+            return (ItemType)values.GetValue(Random.Range(0, values.Length));
+        }
+
 
         public override void MoveItemBetweenCells(Cell cell)
         {
             cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
             CurrentClickCell.ItemPrefabs = null;
             CurrentClickCell = null;
-            view.UpdateGeneralInventory(generalCells);
-            view.UpdateFastHandInventory(fastHandCells);
+            view.UpdateGeneralInventory();
+            view.UpdateFastHandInventory();
         }
 
-        public override void RemoveItem(Cell cell)
+        public override void MoveItemToFastHand(Cell cell)
         {
-            if (!generalCells.Contains(cell))
+            if (!generalCells.Contains(cell) || IsInventoryFull())
                 return;
-
-            if (fastHandCells.All(x => !x.IsEmpty))
-            {
-                view.DisplayText(MessagePlayerContainers.InventoryIsFullIsNotEmpty);
-                return;
-            }
 
             var emptyCell = fastHandCells.FirstOrDefault(x => x.IsEmpty);
             emptyCell.ItemPrefabs = cell.ItemPrefabs;
             cell.ItemPrefabs = null;
-            view.UpdateGeneralInventory(generalCells);
-            view.UpdateFastHandInventory(fastHandCells);
+            view.UpdateGeneralInventory();
+            view.UpdateFastHandInventory();
+        }
+
+        private bool IsInventoryFull()
+        {
+            if (fastHandCells.All(x => !x.IsEmpty))
+            {
+                view.DisplayText(MessagePlayerContainers.InventoryIsFullIsNotEmpty);
+                AudioController.Instance.PlayErrorSound();
+                return true;
+            }
+
+            return false;
         }
 
         public override void MoveItem(Vector3 vector)

@@ -6,15 +6,14 @@ namespace Assets.Inventory.Scripts.View
 {
     public abstract class View : MonoBehaviour
     {
-        public virtual void Initialize(ICollection<Cell> fasthandCells, ICollection<Cell> generalCells)
+        public virtual void Initialize(IEnumerable<Cell> fasthandCells, IEnumerable<Cell> generalCells)
         {
         }
 
-        public abstract void UpdateGeneralInventory(ICollection<Cell> cells);
-        public abstract void UpdateFastHandInventory(ICollection<Cell> cells);
-
+        public abstract void UpdateGeneralInventory();
+        public abstract void UpdateFastHandInventory();
+        public abstract void UpdatePositionCell(Cell currentClickCell);
+        public abstract void UpdateVisual();
         public virtual void DisplayText(string str, int time = 1) { }
-        public virtual void UpdatePositionCell(Cell currentClickCell) { }
-        public virtual void UpdateVisual() { }
     }
 }

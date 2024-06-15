@@ -1,7 +1,6 @@
 using Assets.Inventory.Scripts.Helpers.Cells;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -14,18 +13,18 @@ namespace Assets.Inventory.Scripts.View
         [SerializeField] private TextMeshProUGUI errorText;
         [SerializeField] private Transform tmpGameObject;
 
-        [SerializeField] private List<Cell> generalCells;
-        [SerializeField] private List<Cell> fastHandCells;
-        public override void Initialize(ICollection<Cell> fastHandCells, ICollection<Cell> generalCells)
+        [SerializeField] private IEnumerable<Cell> generalCells;
+        [SerializeField] private IEnumerable<Cell> fastHandCells;
+        public override void Initialize(IEnumerable<Cell> fastHandCells, IEnumerable<Cell> generalCells)
         {
-            this.generalCells = new List<Cell>(generalCells);
-            this.fastHandCells = new List<Cell>(fastHandCells);
+            this.generalCells = generalCells;
+            this.fastHandCells = fastHandCells;
             DisplayInventory(this.fastHandCells, fastHandContentTransform);
             DisplayInventory(this.generalCells, generalContentTransform);
             tmpGameObject.SetAsLastSibling();
         }
 
-        private void DisplayInventory(ICollection<Cell> cells, Transform parent)
+        private void DisplayInventory(IEnumerable<Cell> cells, Transform parent)
         {
             foreach (var cell in cells)
             {
@@ -36,35 +35,32 @@ namespace Assets.Inventory.Scripts.View
 
         public override void UpdateVisual()
         {
-            UpdateGeneralInventory(generalCells);
-            UpdateFastHandInventory(fastHandCells);
+            UpdateGeneralInventory();
+            UpdateFastHandInventory();
         }
-        public override void UpdateGeneralInventory(ICollection<Cell> cells)
+        public override void UpdateGeneralInventory()
         {
-            foreach (var cell in cells)
+            foreach (var cell in generalCells)
             {
                 if (cell.ItemPrefabs is null)
                     continue;
-
-                var visibilityCell = generalCells.FirstOrDefault(x => x == cell);
-                visibilityCell.ItemPrefabs.transform.SetParent(visibilityCell.transform);
-                visibilityCell.ItemPrefabs.gameObject.transform.position = visibilityCell.transform.position;
-                visibilityCell.ItemPrefabs.gameObject.transform.localScale = Vector3.one;
+                TransformCell(cell);
             }
         }
-
-        public override void UpdateFastHandInventory(ICollection<Cell> cells)
+        public override void UpdateFastHandInventory()
         {
-            foreach (var cell in cells)
+            foreach (var cell in fastHandCells)
             {
                 if (cell.ItemPrefabs is null)
                     continue;
-
-                var visibilityCell = fastHandCells.FirstOrDefault(x => x == cell);
-                visibilityCell.ItemPrefabs.transform.SetParent(visibilityCell.transform);
-                visibilityCell.ItemPrefabs.gameObject.transform.position = visibilityCell.transform.position;
-                visibilityCell.ItemPrefabs.gameObject.transform.localScale = Vector3.one;
+                TransformCell(cell);
             }
+        }
+        private void TransformCell(Cell cell)
+        {
+            cell.ItemPrefabs.transform.SetParent(cell.transform);
+            cell.ItemPrefabs.gameObject.transform.position = cell.transform.position;
+            cell.ItemPrefabs.gameObject.transform.localScale = Vector3.one;
         }
 
         public override void DisplayText(string str, int time = 1)
