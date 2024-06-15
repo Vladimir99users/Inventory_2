@@ -38,6 +38,11 @@ namespace Assets.Inventory.Scripts.View
             }
         }
 
+        public override void UpdateVisial()
+        {
+            UpdateGeneralInventory(generalCells);
+            UpdateFastHandInventory(fastHandCells);
+        }
         public override void UpdateGeneralInventory(ICollection<Cell> cells)
         {
             foreach (var cell in cells)

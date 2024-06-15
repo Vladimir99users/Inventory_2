@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6747178004045386259}
   - component: {fileID: 2234850815764128153}
   - component: {fileID: 3215825414071108448}
+  - component: {fileID: -330796691208049459}
   m_Layer: 5
   m_Name: ItemPrefabs
   m_TagString: Untagged
@@ -89,3 +90,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 2234850815764128153}
+--- !u!225 &-330796691208049459
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392444330429409037}
+  m_Enabled: 0
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

@@ -14,5 +14,15 @@ namespace Assets.Inventory.Scripts.Controller
             this.view = view;
         }
 
+        public void OnMoveItem()
+        {
+            var positionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (model.CurrentClickCell != null)
+            {
+                model.MoveItem(new Vector3(positionMouse.x, positionMouse.y, 0));
+                view.UpdatePositionCell(model.CurrentClickCell);
+            }
+        }
+
     }
 }

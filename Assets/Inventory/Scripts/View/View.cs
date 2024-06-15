@@ -22,5 +22,9 @@ namespace Assets.Inventory.Scripts.View
         {
 
         }
+
+        public virtual void UpdateVisial()
+        {
+        }
     }
 }

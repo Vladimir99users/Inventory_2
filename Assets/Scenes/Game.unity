@@ -396,7 +396,7 @@ MonoBehaviour:
   itemFactory: {fileID: 11400000, guid: 31225452478869f4391eef97708ae68a, type: 2}
   cellFactory: {fileID: 11400000, guid: 01dfe7970ab0ea3429839f523eaae3fb, type: 2}
   simplyView: {fileID: 6571844826251144117, guid: ccea7edc4c80fb240bcd6a6ebaba99d5, type: 3}
-  controller: {fileID: 2051390934251649573, guid: 51b5e71ecaeb0a545a8444049f9fff8c, type: 3}
+  controller: {fileID: 3558834759172203978, guid: eb39805ea6aa95448a57119ebeedfe4b, type: 3}
   settingModel:
     HeightGeneralInventory: 10
     WightGeneralInventory: 10

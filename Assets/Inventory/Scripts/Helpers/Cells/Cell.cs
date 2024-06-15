@@ -9,7 +9,5 @@ namespace Assets.Inventory.Scripts.Helpers.Cells
         public CellType CellType { get; set; }
 
         public ItemPrefabs ItemPrefabs;
-
-
     }
 }

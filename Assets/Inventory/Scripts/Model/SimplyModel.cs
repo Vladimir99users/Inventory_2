@@ -33,8 +33,6 @@ namespace Assets.Inventory.Scripts.Model
             view.Initialize(fastHandCells, generalCells);
         }
 
-
-
         private void BuildingInventory(int height, int wight, ICollection<Cell> inventory, CellType type)
         {
             for (int i = 0; i < height; i++)
@@ -65,12 +63,12 @@ namespace Assets.Inventory.Scripts.Model
         public override void MoveItemBetweenCells(Cell cell)
         {
             cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
+            cell.ItemPrefabs.gameObject.name = $"ItemPrefabs = {cell.gameObject.name}";
             CurrentClickCell.ItemPrefabs = null;
             CurrentClickCell = null;
             view.UpdateGeneralInventory(generalCells);
             view.UpdateFastHandInventory(fastHandCells);
         }
-
 
         public override void RemoveItem()
         {
