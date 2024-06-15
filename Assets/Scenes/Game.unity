@@ -188,7 +188,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 33
+    m_Bits: 97
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -392,8 +392,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3761ea09b9c374a8fa5ab2187fd252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentViewTransform: {fileID: 622173650}
+  parentControllerTransform: {fileID: 622173650}
+  itemFactory: {fileID: 11400000, guid: 31225452478869f4391eef97708ae68a, type: 2}
+  cellFactory: {fileID: 11400000, guid: 01dfe7970ab0ea3429839f523eaae3fb, type: 2}
   simplyView: {fileID: 6571844826251144117, guid: ccea7edc4c80fb240bcd6a6ebaba99d5, type: 3}
+  controller: {fileID: 2051390934251649573, guid: 51b5e71ecaeb0a545a8444049f9fff8c, type: 3}
+  settingModel:
+    HeightGeneralInventory: 10
+    WightGeneralInventory: 10
+    HeightFastHandInventory: 1
+    WightFastHandInventory: 6
 --- !u!1 &1137541425
 GameObject:
   m_ObjectHideFlags: 0
