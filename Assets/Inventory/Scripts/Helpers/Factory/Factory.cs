@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Factory : MonoBehaviour
+namespace Assets.Inventory.Scripts.Helpers.Factory
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public abstract class Factory<TObject, TType, TItemSO> : ScriptableObject
     {
-        
+        public abstract TObject GetObject(TType type);
+        public abstract TObject GetObject(TType type, Transform transform);
+        protected abstract TItemSO Get(TType type);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+
+
