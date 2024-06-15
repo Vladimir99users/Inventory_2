@@ -1,5 +1,4 @@
 using Assets.Inventory.Scripts.Helpers.Cells;
-using Assets.Inventory.Scripts.Helpers.Items;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +15,7 @@ namespace Assets.Inventory.Scripts.View
         [SerializeField] private Transform tmpGameObject;
 
         [SerializeField] private List<Cell> generalCells;
-        private ICollection<ItemPrefabs> generalItems;
-
         [SerializeField] private List<Cell> fastHandCells;
-        private ICollection<ItemPrefabs> fastHandItems;
         public override void Initialize(ICollection<Cell> fastHandCells, ICollection<Cell> generalCells)
         {
             this.generalCells = new List<Cell>(generalCells);
@@ -38,7 +34,7 @@ namespace Assets.Inventory.Scripts.View
             }
         }
 
-        public override void UpdateVisial()
+        public override void UpdateVisual()
         {
             UpdateGeneralInventory(generalCells);
             UpdateFastHandInventory(fastHandCells);

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace Assets.Inventory.Scripts.Controller
 {
-    public class DragAndDropController : Controller, IBeginDragHandler, IEndDragHandler, IDragHandler
+    public class DragAndDropController : Controller, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         [SerializeField] private Button generateItemButton;
 
@@ -29,7 +29,6 @@ namespace Assets.Inventory.Scripts.Controller
                 }
             }
         }
-
         public void OnDrag(PointerEventData eventData)
         {
             OnMoveItem();
@@ -41,7 +40,7 @@ namespace Assets.Inventory.Scripts.Controller
                 if (!cell.IsEmpty && model.CurrentClickCell != null && model.CurrentClickCell != cell)
                 {
                     view.DisplayText(MessagePlayerContainers.PlaceIsNotEmpty);
-                    view.UpdateVisial();
+                    view.UpdateVisual();
                     return;
                 }
 
@@ -53,7 +52,18 @@ namespace Assets.Inventory.Scripts.Controller
 
             if (model.CurrentClickCell != null)
             {
-                view.UpdateVisial();
+                view.UpdateVisual();
+            }
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.pointerCurrentRaycast.gameObject.TryGetComponent(out Cell cell))
+            {
+                if (!cell.IsEmpty)
+                {
+                    model.RemoveItem(cell);
+                }
             }
         }
     }

@@ -13,18 +13,8 @@ namespace Assets.Inventory.Scripts.View
         public abstract void UpdateGeneralInventory(ICollection<Cell> cells);
         public abstract void UpdateFastHandInventory(ICollection<Cell> cells);
 
-        public virtual void DisplayText(string str, int time = 1)
-        {
-
-        }
-
-        public virtual void UpdatePositionCell(Cell currentClickCell)
-        {
-
-        }
-
-        public virtual void UpdateVisial()
-        {
-        }
+        public virtual void DisplayText(string str, int time = 1) { }
+        public virtual void UpdatePositionCell(Cell currentClickCell) { }
+        public virtual void UpdateVisual() { }
     }
 }

@@ -13,9 +13,8 @@ namespace Assets.Inventory.Scripts.Model
     public class SimplyModel : Model
     {
         private ICollection<Cell> generalCells = new List<Cell>();
-        private ICollection<ItemPrefabs> eneralItems = new List<ItemPrefabs>();
         private ICollection<Cell> fastHandCells = new List<Cell>();
-        private ICollection<ItemPrefabs> fastHandItems = new List<ItemPrefabs>();
+
         private readonly ItemFactory itemFactory;
         private readonly CellFactory cellFactory;
         private readonly SettingModel settingModel;
@@ -56,29 +55,39 @@ namespace Assets.Inventory.Scripts.Model
             var emptyCell = fastHandCells.FirstOrDefault(x => x.IsEmpty);
             var item = itemFactory.GetObject(ItemType.Apple);
             emptyCell.ItemPrefabs = item;
-            fastHandItems.Add(item);
             view.UpdateFastHandInventory(fastHandCells);
         }
 
         public override void MoveItemBetweenCells(Cell cell)
         {
             cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
-            cell.ItemPrefabs.gameObject.name = $"ItemPrefabs = {cell.gameObject.name}";
             CurrentClickCell.ItemPrefabs = null;
             CurrentClickCell = null;
             view.UpdateGeneralInventory(generalCells);
             view.UpdateFastHandInventory(fastHandCells);
         }
 
-        public override void RemoveItem()
+        public override void RemoveItem(Cell cell)
         {
+            if (!generalCells.Contains(cell))
+                return;
 
+            if (fastHandCells.All(x => !x.IsEmpty))
+            {
+                view.DisplayText(MessagePlayerContainers.InventoryIsFullIsNotEmpty);
+                return;
+            }
+
+            var emptyCell = fastHandCells.FirstOrDefault(x => x.IsEmpty);
+            emptyCell.ItemPrefabs = cell.ItemPrefabs;
+            cell.ItemPrefabs = null;
+            view.UpdateGeneralInventory(generalCells);
+            view.UpdateFastHandInventory(fastHandCells);
         }
 
         public override void MoveItem(Vector3 vector)
-        {
-            CurrentClickCell.ItemPrefabs.transform.position = vector;
-        }
+            => CurrentClickCell.ItemPrefabs.transform.position = vector;
+
 
 
     }

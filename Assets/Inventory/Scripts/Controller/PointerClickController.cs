@@ -29,6 +29,11 @@ namespace Assets.Inventory.Scripts.Controller
                     model.MoveItemBetweenCells(cell);
                 }
             }
+
+            if (model.CurrentClickCell != null)
+            {
+                view.UpdateVisial();
+            }
         }
 
         public void OnPointerDown(PointerEventData eventData)
