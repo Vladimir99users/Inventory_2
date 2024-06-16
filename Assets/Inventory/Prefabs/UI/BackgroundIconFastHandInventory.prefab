@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -489431993952235566, guid: 8adba9953fbe7af45a02dc4517e2fbf5, type: 3}
+      propertyPath: ChildImage
+      value: 
+      objectReference: {fileID: 1088778921917624814}
     - target: {fileID: 1270769648163650072, guid: 8adba9953fbe7af45a02dc4517e2fbf5, type: 3}
       propertyPath: m_Name
       value: BackgroundIconFastHandInventory
@@ -137,6 +141,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -7261888988002021959}
   m_SourcePrefab: {fileID: 100100000, guid: 8adba9953fbe7af45a02dc4517e2fbf5, type: 3}
+--- !u!114 &1088778921917624814 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4245141049896075816, guid: 8adba9953fbe7af45a02dc4517e2fbf5, type: 3}
+  m_PrefabInstance: {fileID: 3888255617611674566}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2618691043722086878 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1270769648163650072, guid: 8adba9953fbe7af45a02dc4517e2fbf5, type: 3}

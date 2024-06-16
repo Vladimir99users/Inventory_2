@@ -36,11 +36,13 @@ namespace Assets.Inventory.Scripts.Controller
         {
             if (model.CurrentClickCell?.IsEmpty == true)
                 return;
+
+            model.CurrentClickCell.ItemPrefabs.Image.color = new Color(1, 1, 1, 1);
             OnMoveItem();
         }
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (eventData.pointerCurrentRaycast.gameObject.TryGetComponent(out Cell cell))
+            if (eventData.pointerCurrentRaycast.gameObject?.TryGetComponent(out Cell cell) == true)
             {
                 if (!cell.IsEmpty && model.CurrentClickCell != null && model.CurrentClickCell != cell)
                 {
@@ -53,6 +55,7 @@ namespace Assets.Inventory.Scripts.Controller
 
                 if (model.CurrentClickCell != null && model.CurrentClickCell != cell && cell.IsEmpty)
                 {
+                    model.CurrentClickCell.ItemPrefabs.Image.color = new Color(1, 1, 1, 0);
                     model.MoveItemBetweenCells(cell);
                     AudioController.Instance.PlayGoodSound();
                     return;

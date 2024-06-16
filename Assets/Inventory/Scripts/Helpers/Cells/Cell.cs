@@ -9,6 +9,7 @@ namespace Assets.Inventory.Scripts.Helpers.Cells
         public CellType CellType { get; set; }
 
         [SerializeField] private ItemPrefabs itemPrefabs;
+        [SerializeField] private Image ChildImage;
         public ItemPrefabs ItemPrefabs
         {
             get => itemPrefabs;
@@ -17,10 +18,14 @@ namespace Assets.Inventory.Scripts.Helpers.Cells
                 itemPrefabs = value;
                 var color = itemPrefabs is null ? Color.white : Color.gray;
                 Image.color = color;
+                ChildImage.sprite = itemPrefabs?.Sprite;
+                ChildImage.color = itemPrefabs?.Sprite is null ? new Color(1, 1, 1, 0) : new Color(1, 1, 1, 1);
             }
         }
 
         public bool IsEmpty => itemPrefabs is null;
         private Image Image => GetComponent<Image>();
+
+
     }
 }
