@@ -7,6 +7,7 @@ namespace Assets.Inventory.Scripts.Helpers.Items
         public string Name { get; }
         public ItemType Type { get; }
         public Sprite Sprite { get; }
+        public Vector2Int Size { get; }
 
         public Item() { }
 
@@ -15,6 +16,7 @@ namespace Assets.Inventory.Scripts.Helpers.Items
             Name = itemSo.name;
             Type = itemSo.ItemType;
             Sprite = itemSo.VisualizationSprite;
+            Size = itemSo.Size;
         }
     }
 }

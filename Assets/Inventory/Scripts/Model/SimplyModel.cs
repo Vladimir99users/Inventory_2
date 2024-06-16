@@ -15,8 +15,10 @@ namespace Assets.Inventory.Scripts.Model
 
     public class SimplyModel : Model
     {
-        private ICollection<Cell> generalCells = new List<Cell>();
-        private ICollection<Cell> fastHandCells = new List<Cell>();
+        private IList<Cell> generalCells = new List<Cell>();
+        private IList<Cell> fastHandCells = new List<Cell>();
+
+        private Cell[][] grid;
 
         private readonly ItemFactory itemFactory;
         private readonly CellFactory cellFactory;
@@ -30,6 +32,11 @@ namespace Assets.Inventory.Scripts.Model
         }
         public override void BuildInventory()
         {
+            grid = new Cell[settingModel.HeightGeneralInventory][];
+            for (int i = 0; i < grid.Length; i++)
+            {
+                grid[i] = new Cell[settingModel.WightGeneralInventory];
+            }
             BuildingInventory(settingModel.HeightFastHandInventory, settingModel.WightFastHandInventory, fastHandCells, CellType.FastCellType);
             BuildingInventory(settingModel.HeightGeneralInventory, settingModel.WightGeneralInventory, generalCells, CellType.GeneralCellType);
             view.Initialize(fastHandCells, generalCells);
@@ -43,6 +50,7 @@ namespace Assets.Inventory.Scripts.Model
                 {
                     var cell = cellFactory.GetObject(type);
                     cell.name = $"{type.ToString()} => {i}:{j}";
+                    grid[i][j] = cell;
                     inventory.Add(cell);
                 }
             }
@@ -67,11 +75,72 @@ namespace Assets.Inventory.Scripts.Model
 
         public override void MoveItemBetweenCells(Cell cell)
         {
-            cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
-            CurrentClickCell.ItemPrefabs = null;
-            CurrentClickCell = null;
+            if (fastHandCells.Contains(cell))
+            {
+                cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
+                CurrentClickCell.ItemPrefabs = null;
+                CurrentClickCell = null;
+            }
+            else
+            {
+                var itemSize = CurrentClickCell.ItemPrefabs.Size; // 5, 2
+                var indexHeigth = -1;
+                var indexWigth = -1;
+                for (int i = 0; i < settingModel.HeightGeneralInventory; i++)
+                {
+                    var indexCellInPlaceItem = Array.IndexOf(grid[i], cell);
+                    if (indexCellInPlaceItem != -1)
+                    {
+                        indexHeigth = i;
+                        indexWigth = indexCellInPlaceItem;
+                        break;
+                    }
+                }
+
+                if (indexHeigth != -1 && indexWigth != -1)
+                {
+                    if (TrySetItem(indexHeigth, indexWigth, itemSize))
+                    {
+                        cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
+                        for (int i = indexHeigth; i < (indexHeigth + itemSize.y); i++)
+                        {
+                            for (int j = indexWigth; j < (indexWigth + itemSize.x); j++)
+                            {
+                                if (grid[i][j].ItemPrefabs is null)
+                                {
+                                    grid[i][j].ItemPrefabs = itemFactory.GetObject(CurrentClickCell.ItemPrefabs.Type);
+                                }
+                            }
+                        }
+                        CurrentClickCell.ItemPrefabs = null;
+                        CurrentClickCell = null;
+                    }
+                }
+            }
             view.UpdateGeneralInventory();
             view.UpdateFastHandInventory();
+        }
+
+        private bool TrySetItem(int indexHeigth, int indexWigth, Vector2Int itemSize)
+        {
+            if ((indexHeigth + itemSize.y) > settingModel.HeightGeneralInventory)
+                return false;
+
+            if ((indexWigth + itemSize.x) > settingModel.WightGeneralInventory)
+                return false;
+
+            for (int i = indexHeigth; i < (indexHeigth + itemSize.y); i++)
+            {
+                for (int j = indexWigth; j < (indexWigth + itemSize.x); j++)
+                {
+                    if (grid[i][j].ItemPrefabs != null)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         public override void MoveItemToFastHand(Cell cell)

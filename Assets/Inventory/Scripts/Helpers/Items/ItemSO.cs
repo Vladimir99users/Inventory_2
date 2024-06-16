@@ -8,5 +8,6 @@ namespace Assets.Inventory.Scripts.Helpers.Items
         public string Name;
         public ItemType ItemType;
         public Sprite VisualizationSprite;
+        public Vector2Int Size = Vector2Int.one;
     }
 }

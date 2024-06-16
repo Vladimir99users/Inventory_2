@@ -15,3 +15,4 @@ MonoBehaviour:
   Name: Candy
   ItemType: 3
   VisualizationSprite: {fileID: 21300000, guid: e54dfb04204381642a400a60368a1aa3, type: 3}
+  Size: {x: 5, y: 1}
