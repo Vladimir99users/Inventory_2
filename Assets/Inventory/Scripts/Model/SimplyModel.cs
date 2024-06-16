@@ -102,7 +102,13 @@ namespace Assets.Inventory.Scripts.Model
                 {
                     if (IsPlaceToEmptyOrOutOfRange(indexHeigth, indexWigth, itemSize))
                     {
+                        var cells = generalCells.Where(x => x.ItemPrefabs == CurrentClickCell.ItemPrefabs).ToList();
                         cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
+                        foreach (var cel in cells)
+                        {
+                            cel.ItemPrefabs = null;
+                        }
+
 
                         for (int i = indexHeigth; i < (indexHeigth + itemSize.y); i++)
                         {
@@ -110,7 +116,7 @@ namespace Assets.Inventory.Scripts.Model
                             {
                                 if (grid[i][j].ItemPrefabs is null)
                                 {
-                                    grid[i][j].ItemPrefabs = CurrentClickCell.ItemPrefabs;
+                                    grid[i][j].ItemPrefabs = cell.ItemPrefabs;
                                 }
                             }
                         }
