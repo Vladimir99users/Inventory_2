@@ -19,6 +19,7 @@ namespace Assets.Inventory.Scripts.Model
         private IList<Cell> fastHandCells = new List<Cell>();
 
         private Cell[][] grid;
+        private Dictionary<Cell, Cell[][]> groupCells = new Dictionary<Cell, Cell[][]>();
 
         private readonly ItemFactory itemFactory;
         private readonly CellFactory cellFactory;
@@ -83,7 +84,7 @@ namespace Assets.Inventory.Scripts.Model
             }
             else
             {
-                var itemSize = CurrentClickCell.ItemPrefabs.Size; // 5, 2
+                var itemSize = CurrentClickCell.ItemPrefabs.Size;
                 var indexHeigth = -1;
                 var indexWigth = -1;
                 for (int i = 0; i < settingModel.HeightGeneralInventory; i++)
@@ -99,19 +100,21 @@ namespace Assets.Inventory.Scripts.Model
 
                 if (indexHeigth != -1 && indexWigth != -1)
                 {
-                    if (TrySetItem(indexHeigth, indexWigth, itemSize))
+                    if (IsPlaceToEmptyOrOutOfRange(indexHeigth, indexWigth, itemSize))
                     {
                         cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
+
                         for (int i = indexHeigth; i < (indexHeigth + itemSize.y); i++)
                         {
                             for (int j = indexWigth; j < (indexWigth + itemSize.x); j++)
                             {
                                 if (grid[i][j].ItemPrefabs is null)
                                 {
-                                    grid[i][j].ItemPrefabs = itemFactory.GetObject(CurrentClickCell.ItemPrefabs.Type);
+                                    grid[i][j].ItemPrefabs = CurrentClickCell.ItemPrefabs;
                                 }
                             }
                         }
+
                         CurrentClickCell.ItemPrefabs = null;
                         CurrentClickCell = null;
                     }
@@ -120,8 +123,8 @@ namespace Assets.Inventory.Scripts.Model
             view.UpdateGeneralInventory();
             view.UpdateFastHandInventory();
         }
-
-        private bool TrySetItem(int indexHeigth, int indexWigth, Vector2Int itemSize)
+        //TODO разделить два условия
+        private bool IsPlaceToEmptyOrOutOfRange(int indexHeigth, int indexWigth, Vector2Int itemSize)
         {
             if ((indexHeigth + itemSize.y) > settingModel.HeightGeneralInventory)
                 return false;
@@ -150,7 +153,12 @@ namespace Assets.Inventory.Scripts.Model
 
             var emptyCell = fastHandCells.FirstOrDefault(x => x.IsEmpty);
             emptyCell.ItemPrefabs = cell.ItemPrefabs;
-            cell.ItemPrefabs = null;
+            var cells = generalCells.Where(x => x.ItemPrefabs == cell.ItemPrefabs).ToList();
+            foreach (var cel in cells)
+            {
+                cel.ItemPrefabs = null;
+            }
+
             view.UpdateGeneralInventory();
             view.UpdateFastHandInventory();
         }

@@ -8,12 +8,18 @@ namespace Assets.Inventory.Scripts.Helpers.Items
         [SerializeField] private Image image;
         public Vector2Int Size { get; private set; }
         public ItemType Type { get; private set; }
-
+        public Sprite Sprite { get; private set; }
         public void Initialize(Item item)
         {
-            image.sprite = item.Sprite;
             Size = item.Size;
             Type = item.Type;
+            Sprite = item.Sprite;
+            SetImage(Sprite);
+        }
+
+        public void SetImage(Sprite sprite)
+        {
+            image.sprite = sprite;
         }
     }
 }
