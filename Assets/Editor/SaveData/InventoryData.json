@@ -1,0 +1,748 @@
+{
+    "GeneralCells": [
+        {
+            "Height": 0,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 3,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 4,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 5,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 3,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 4,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 5,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 1,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 3,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 4,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 5,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 2,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 3,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 4,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 5,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 3,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 3,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 4,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 5,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 4,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 3,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 4,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 5,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 5,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 3,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 4,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 5,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 6,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 3,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 4,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 5,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 7,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 3,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 4,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 5,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 8,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 0,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 2,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 3,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 4,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 5,
+            "IsEmpty": false,
+            "ItemType": 2,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 6,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 7,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 8,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 9,
+            "Weight": 9,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        }
+    ],
+    "FastHandCells": [
+        {
+            "Height": 0,
+            "Weight": 0,
+            "IsEmpty": false,
+            "ItemType": 3,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 1,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 2,
+            "IsEmpty": false,
+            "ItemType": 3,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 3,
+            "IsEmpty": false,
+            "ItemType": 1,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 4,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        },
+        {
+            "Height": 0,
+            "Weight": 5,
+            "IsEmpty": true,
+            "ItemType": 0,
+            "CellType": 0
+        }
+    ]
+}

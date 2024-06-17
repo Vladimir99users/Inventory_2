@@ -4,6 +4,7 @@ using Assets.Inventory.Scripts.Helpers.Cells;
 using Assets.Inventory.Scripts.Helpers.Factory;
 using Assets.Inventory.Scripts.Helpers.Items;
 using Assets.Inventory.Scripts.Helpers.Message;
+using Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,35 +13,121 @@ using Random = UnityEngine.Random;
 
 namespace Assets.Inventory.Scripts.Model
 {
-
+    [Serializable]
     public class SimplyModel : Model
     {
-        private IList<Cell> generalCells = new List<Cell>();
-        private IList<Cell> fastHandCells = new List<Cell>();
-
         private Cell[][] grid;
-        private Dictionary<Cell, Cell[][]> groupCells = new Dictionary<Cell, Cell[][]>();
-
         private readonly ItemFactory itemFactory;
         private readonly CellFactory cellFactory;
         private readonly SettingModel settingModel;
+        public List<Cell> GeneralCells = new();
+        public List<Cell> FastHandCells = new();
+        public Cell[][] Grid => grid;
 
         public SimplyModel(View.View view, SettingModel setting, ItemFactory itemFactory, CellFactory cellFactory) : base(view)
         {
             this.itemFactory = itemFactory;
             this.cellFactory = cellFactory;
             this.settingModel = setting;
+            dataSave = new DataSave();
+
         }
-        public override void BuildInventory()
+        public override void BuildInventory(DataSave data = null)
         {
             grid = new Cell[settingModel.HeightGeneralInventory][];
             for (int i = 0; i < grid.Length; i++)
             {
                 grid[i] = new Cell[settingModel.WightGeneralInventory];
             }
-            BuildingInventory(settingModel.HeightFastHandInventory, settingModel.WightFastHandInventory, fastHandCells, CellType.FastCellType);
-            BuildingInventory(settingModel.HeightGeneralInventory, settingModel.WightGeneralInventory, generalCells, CellType.GeneralCellType);
-            view.Initialize(fastHandCells, generalCells);
+
+
+            if (data is not null)
+                BuildingInventoryFromSaveData(data);
+            else
+            {
+                BuildingInventory(settingModel.HeightFastHandInventory, settingModel.WightFastHandInventory, FastHandCells, CellType.FastCellType);
+                BuildingInventory(settingModel.HeightGeneralInventory, settingModel.WightGeneralInventory, GeneralCells, CellType.GeneralCellType);
+            }
+
+            view.Initialize(FastHandCells, GeneralCells);
+            view.UpdateGeneralInventory();
+            view.UpdateFastHandInventory();
+        }
+
+        public override DataSave GetDataSave()
+            => new()
+            {
+                GeneralCells = GetDataFromInventory(GeneralCells),
+                FastHandCells = GetDataFromInventory(FastHandCells)
+            };
+
+        private List<CellData> GetDataFromInventory(IEnumerable<Cell> inventory)
+        {
+            var saveData = new List<CellData>();
+
+            foreach (var cell in inventory)
+            {
+                saveData.Add(new CellData
+                {
+                    CellType = cell.CellType,
+                    Height = cell.Height,
+                    Weight = cell.Weight,
+                    IsEmpty = cell.IsEmpty,
+                    ItemType = cell.ItemPrefabs?.Type ?? ItemType.None
+                });
+            }
+
+            return saveData;
+        }
+
+        private void BuildingInventoryFromSaveData(DataSave data)
+        {
+            var dataGeneralCells = data.GeneralCells;
+            var dataFastHandCells = data.FastHandCells;
+            GeneralCells.Clear();
+            foreach (var saveCell in dataGeneralCells)
+            {
+                var cell = cellFactory.GetObject(saveCell.CellType);
+                cell.Height = saveCell.Height;
+                cell.Weight = saveCell.Weight;
+                grid[cell.Height][cell.Weight] = cell;
+                GeneralCells.Add(cell);
+            }
+
+            foreach (var saveCell in dataGeneralCells)
+            {
+                if (saveCell.ItemType == ItemType.None)
+                    continue;
+
+                var cell = GeneralCells.FirstOrDefault(x => x.Height == saveCell.Height && x.Weight == saveCell.Weight);
+                if (cell is not null && cell.IsEmpty)
+                {
+                    cell.ItemPrefabs = itemFactory.GetObject(saveCell.ItemType);
+                    for (int i = cell.Height; i < (cell.Height + cell.ItemPrefabs.Size.y); i++)
+                    {
+                        for (int j = cell.Weight; j < (cell.Weight + cell.ItemPrefabs.Size.x); j++)
+                        {
+                            if (grid[i][j].ItemPrefabs is null)
+                            {
+                                grid[i][j].ItemPrefabs = cell.ItemPrefabs;
+                            }
+                        }
+                    }
+                }
+            }
+
+            FastHandCells.Clear();
+            foreach (var saveCell in dataFastHandCells)
+            {
+                var cell = cellFactory.GetObject(saveCell.CellType);
+                cell.Height = saveCell.Height;
+                cell.Weight = saveCell.Weight;
+                if (!saveCell.IsEmpty)
+                    cell.ItemPrefabs = itemFactory.GetObject(saveCell.ItemType);
+
+                grid[cell.Height][cell.Weight] = cell;
+                FastHandCells.Add(cell);
+            }
         }
 
         private void BuildingInventory(int height, int wight, ICollection<Cell> inventory, CellType type)
@@ -50,7 +137,10 @@ namespace Assets.Inventory.Scripts.Model
                 for (int j = 0; j < wight; j++)
                 {
                     var cell = cellFactory.GetObject(type);
+                    cell.CellType = type;
                     cell.name = $"{type.ToString()} => {i}:{j}";
+                    cell.Height = i;
+                    cell.Weight = j;
                     grid[i][j] = cell;
                     inventory.Add(cell);
                 }
@@ -61,7 +151,7 @@ namespace Assets.Inventory.Scripts.Model
             if (IsInventoryFull())
                 return;
 
-            var emptyCell = fastHandCells.FirstOrDefault(x => x.IsEmpty);
+            var emptyCell = FastHandCells.FirstOrDefault(x => x.IsEmpty);
             var item = itemFactory.GetObject(GetRandomItemType());
             emptyCell.ItemPrefabs = item;
             view.UpdateFastHandInventory();
@@ -70,15 +160,19 @@ namespace Assets.Inventory.Scripts.Model
         private ItemType GetRandomItemType()
         {
             var values = Enum.GetValues(typeof(ItemType));
-            return (ItemType)values.GetValue(Random.Range(0, values.Length));
+            return (ItemType)values.GetValue(Random.Range(1, values.Length));
         }
-
-
         public override void MoveItemBetweenCells(Cell cell)
         {
-            if (fastHandCells.Contains(cell))
+            if (FastHandCells.Contains(cell))
             {
+                var cells = GeneralCells.Where(x => x.ItemPrefabs == CurrentClickCell.ItemPrefabs).ToList();
                 cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
+                foreach (var cel in cells)
+                {
+                    cel.ItemPrefabs = null;
+                }
+
                 CurrentClickCell.ItemPrefabs = null;
                 CurrentClickCell = null;
             }
@@ -100,9 +194,9 @@ namespace Assets.Inventory.Scripts.Model
 
                 if (indexHeigth != -1 && indexWigth != -1)
                 {
-                    if (IsPlaceToEmptyOrOutOfRange(indexHeigth, indexWigth, itemSize))
+                    if (IsPlacesEmpty(indexHeigth, indexWigth, itemSize) && !IsOutOfTheRange(indexHeigth, indexWigth, itemSize))
                     {
-                        var cells = generalCells.Where(x => x.ItemPrefabs == CurrentClickCell.ItemPrefabs).ToList();
+                        var cells = GeneralCells.Where(x => x.ItemPrefabs == CurrentClickCell.ItemPrefabs).ToList();
                         cell.ItemPrefabs = CurrentClickCell.ItemPrefabs;
                         foreach (var cel in cells)
                         {
@@ -129,14 +223,8 @@ namespace Assets.Inventory.Scripts.Model
             view.UpdateGeneralInventory();
             view.UpdateFastHandInventory();
         }
-        //TODO разделить два условия
-        private bool IsPlaceToEmptyOrOutOfRange(int indexHeigth, int indexWigth, Vector2Int itemSize)
+        private bool IsPlacesEmpty(int indexHeigth, int indexWigth, Vector2Int itemSize)
         {
-            if ((indexHeigth + itemSize.y) > settingModel.HeightGeneralInventory)
-                return false;
-
-            if ((indexWigth + itemSize.x) > settingModel.WightGeneralInventory)
-                return false;
 
             for (int i = indexHeigth; i < (indexHeigth + itemSize.y); i++)
             {
@@ -152,14 +240,20 @@ namespace Assets.Inventory.Scripts.Model
             return true;
         }
 
+        private bool IsOutOfTheRange(int indexHeigth, int indexWigth, Vector2Int itemSize)
+            => (indexHeigth + itemSize.y) > settingModel.HeightGeneralInventory ||
+               (indexWigth + itemSize.x) > settingModel.WightGeneralInventory;
+
+
+
         public override void MoveItemToFastHand(Cell cell)
         {
-            if (!generalCells.Contains(cell) || IsInventoryFull())
+            if (!GeneralCells.Contains(cell) || IsInventoryFull())
                 return;
 
-            var emptyCell = fastHandCells.FirstOrDefault(x => x.IsEmpty);
+            var emptyCell = FastHandCells.FirstOrDefault(x => x.IsEmpty);
             emptyCell.ItemPrefabs = cell.ItemPrefabs;
-            var cells = generalCells.Where(x => x.ItemPrefabs == cell.ItemPrefabs).ToList();
+            var cells = GeneralCells.Where(x => x.ItemPrefabs == cell.ItemPrefabs).ToList();
             foreach (var cel in cells)
             {
                 cel.ItemPrefabs = null;
@@ -171,7 +265,7 @@ namespace Assets.Inventory.Scripts.Model
 
         private bool IsInventoryFull()
         {
-            if (fastHandCells.All(x => !x.IsEmpty))
+            if (FastHandCells.All(x => !x.IsEmpty))
             {
                 view.DisplayText(MessagePlayerContainers.InventoryIsFullIsNotEmpty);
                 AudioController.Instance.PlayErrorSound();

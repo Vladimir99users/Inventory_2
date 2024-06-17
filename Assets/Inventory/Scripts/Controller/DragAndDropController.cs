@@ -25,7 +25,7 @@ namespace Assets.Inventory.Scripts.Controller
         {
             if (eventData.pointerPressRaycast.gameObject.TryGetComponent(out Cell cell))
             {
-                if (cell.ItemPrefabs != null)
+                if (cell.ItemPrefabs is not null)
                 {
                     model.CurrentClickCell = cell;
                     AudioController.Instance.PlayBeginSound();
@@ -37,7 +37,9 @@ namespace Assets.Inventory.Scripts.Controller
             if (model.CurrentClickCell?.IsEmpty == true)
                 return;
 
-            model.CurrentClickCell.ItemPrefabs.Image.color = new Color(1, 1, 1, 1);
+            if (model.CurrentClickCell != null)
+                model.CurrentClickCell.ItemPrefabs.Image.color = new Color(1, 1, 1, 1);
+
             OnMoveItem();
         }
         public void OnEndDrag(PointerEventData eventData)

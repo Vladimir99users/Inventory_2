@@ -1,8 +1,11 @@
 using Assets.Inventory.Scripts.Boostrap;
 using Assets.Inventory.Scripts.Controller;
+using Assets.Inventory.Scripts.Helpers.Cells;
 using Assets.Inventory.Scripts.Helpers.Factory;
+using Assets.Inventory.Scripts.IOSystem;
 using Assets.Inventory.Scripts.Model;
 using Assets.Inventory.Scripts.View;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Inventory
@@ -21,7 +24,7 @@ namespace Inventory
         [Header("Model setting")]
         [SerializeField] private SettingModel settingModel;
 
-
+        private Model model;
         private void Awake()
         {
             if (!IsCheckGameObjectExist())
@@ -31,8 +34,9 @@ namespace Inventory
             var viewPrefabs = Instantiate(simplyView, controllerPrefabs.transform);
             viewPrefabs.transform.SetParent(controllerPrefabs.transform);
             viewPrefabs.transform.SetAsFirstSibling();
-            var model = new SimplyModel(viewPrefabs, settingModel, itemFactory, cellFactory);
-            model.BuildInventory();
+
+            model = new SimplyModel(viewPrefabs, settingModel, itemFactory, cellFactory);
+            model.BuildInventory(IOSystem.Load<DataSave>());
             controllerPrefabs.Initialize(model, viewPrefabs);
         }
 
@@ -53,6 +57,16 @@ namespace Inventory
             return true;
         }
 
+        private void OnDisable()
+        {
+            IOSystem.Save(model.GetDataSave());
+        }
 
+    }
+
+    public class DataSave
+    {
+        public List<CellData> GeneralCells = new();
+        public List<CellData> FastHandCells = new();
     }
 }

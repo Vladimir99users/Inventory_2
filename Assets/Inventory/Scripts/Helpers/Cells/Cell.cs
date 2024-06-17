@@ -4,8 +4,11 @@ using UnityEngine.UI;
 
 namespace Assets.Inventory.Scripts.Helpers.Cells
 {
+
     public class Cell : MonoBehaviour
     {
+        public int Height;
+        public int Weight;
         public CellType CellType { get; set; }
 
         [SerializeField] private ItemPrefabs itemPrefabs;
